@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/var/www/symfony4/bill/templates/bill/index.html.twig</file>
+            <file>file:/var/www/symfony4/bill/src/Form/PositionType.php</file>
+            <file>file:/var/www/symfony4/bill/src/Form/BillType.php</file>
+            <file>file:/var/www/symfony4/bill/templates/bill/edit.html.twig</file>
+            <file>file:/var/www/symfony4/bill/src/Controller/BillController.php</file>
+            <file>file:/var/www/symfony4/bill/templates/bill/_newRow.html.twig</file>
+            <file>file:/var/www/symfony4/bill/src/Entity/Bill.php</file>
+            <file>file:/var/www/symfony4/bill/src/Entity/Position.php</file>
+            <file>file:/var/www/symfony4/bill/templates/main.html.twig</file>
+            <file>file:/var/www/symfony4/bill/public/css/style.css</file>
+        </group>
+    </open-files>
+</project-private>
