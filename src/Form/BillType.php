@@ -21,7 +21,12 @@ class BillType extends AbstractType
     {
         $builder
             ->add('shop', TextType::class)
-            ->add('date', DateType::class)
+            ->add('date', DateType::class, [
+                'label' => false,
+                'widget' => 'single_text',
+                'attr' => ['class' => 'js-datepicker'],
+                'html5' => false
+            ])
             ->add('summary_brutto', NumberType::class)
             ->add('summary_netto', NumberType::class)
             ->add('positions', CollectionType::class, [

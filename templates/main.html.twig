@@ -55,12 +55,13 @@
         <link rel="stylesheet" href="/nalika/css/calendar/fullcalendar.print.min.css">
         <!-- style CSS
                     ============================================ -->
+        <link rel="stylesheet" href="/nalika/css/datapicker/datepicker3.css">
         <link rel="stylesheet" href="/nalika/style.css">
         <link rel="stylesheet" href="/css/style.css">
         <!-- responsive CSS
                     ============================================ -->
         <link rel="stylesheet" href="/nalika/css/responsive.css">
-        
+
         <!-- jquery
                 ============================================ -->
         <script src="/nalika/js/vendor/jquery-1.12.4.min.js"></script>
@@ -272,6 +273,10 @@
     <!-- sticky JS
                 ============================================ -->
     <script src="/nalika/js/jquery.sticky.js"></script>
+
+    <script src="/nalika/js/datapicker/bootstrap-datepicker.js"></script>
+    <script src="/nalika/js/datapicker/datepicker-active.js"></script>
+
     <!-- scrollUp JS
                 ============================================ -->
     <script src="/nalika/js/jquery.scrollUp.min.js"></script>
@@ -304,6 +309,14 @@
     <!-- main JS
                 ============================================ -->
     <script src="/nalika/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.js-datepicker').datepicker({
+                format: 'yyyy-mm-dd'
+            });
+        });
+    </script>
 </body>
 
 </html>

@@ -4,9 +4,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Bill;
-use App\Entity\Position;
 use App\Form\BillType;
 use Doctrine\Common\Collections\ArrayCollection;
 
