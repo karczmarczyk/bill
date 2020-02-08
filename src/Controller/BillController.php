@@ -19,6 +19,7 @@ class BillController extends AbstractController {
      * Lista paragonów
      * 
      * @Route("/")
+     * @Route("/bill/index", name="listaParagonow")
      */
     public function index () {
         return $this->render('bill/index.html.twig', []);
