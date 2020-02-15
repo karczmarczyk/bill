@@ -7,6 +7,13 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Bill;
 use App\Form\BillType;
 use Doctrine\Common\Collections\ArrayCollection;
+use Omines\DataTablesBundle\Adapter\ArrayAdapter;
+use Omines\DataTablesBundle\Adapter\Doctrine\ORMAdapter;
+use Omines\DataTablesBundle\Column\ActionColumn;
+use Omines\DataTablesBundle\Column\TextColumn;
+use Omines\DataTablesBundle\Column\NumberColumn;
+use Omines\DataTablesBundle\Column\DateTimeColumn;
+use Omines\DataTablesBundle\DataTableFactory;
 
 /**
  * Description of BillController
@@ -21,14 +28,39 @@ class BillController extends AbstractController {
      * @Route("/")
      * @Route("/bill/index", name="listaParagonow")
      */
-    public function index () {
-        return $this->render('bill/index.html.twig', []);
+    public function index (Request $request, DataTableFactory $dataTableFactory) {
+        $table = $dataTableFactory->create()
+            ->add('id', NumberColumn::class, [
+                'label' => 'ID'
+            ])
+            ->add('shop', TextColumn::class, [
+                'label' => 'Sklep'
+            ])
+            ->add('date', DateTimeColumn::class, [
+                'label' => 'Data',
+                'format' => 'Y-m-d'
+            ])
+            ->add("actions", TextColumn::class, [
+                'label' => "Opcje",
+                'render' => function ($value, $context) {
+                    return sprintf('<a class="table-action" href="/edit/%s">%s</a>', $context->getId(), "Edit");
+                }
+            ])
+            ->createAdapter(ORMAdapter::class, [
+                'entity' => Bill::class,
+            ])
+            ->handleRequest($request);
+
+        if ($table->isCallback()) {
+            return $table->getResponse();
+        }
+        return $this->render('bill/index.html.twig', ['datatable' => $table]);
     }
     
     /**
      * Nowy paragon
      * 
-     * @Route("/new")
+     * @Route("/new", name="nowyParagon")
      */
     public function newBill (Request $request) {
         

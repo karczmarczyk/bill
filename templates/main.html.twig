@@ -69,6 +69,12 @@
         <!-- modernizr JS
                     ============================================ -->
         <script src="/nalika/js/vendor/modernizr-2.8.3.min.js"></script>
+
+        <!-- in the <head> section -->
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jq-3.2.1/dt-1.10.16/datatables.min.css"/>
+
+        <!-- before the closing <body> tag -->
+        <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jq-3.2.1/dt-1.10.16/datatables.min.js"></script>
     </head>
 
     <body>
@@ -94,6 +100,7 @@
                                     <span class="mini-click-non">Paragony</span>
                                 </a>
                                 <ul class="submenu-angle" aria-expanded="true">
+                                    <li><a title="nowy" href="{{ path('nowyParagon') }}"><span class="mini-sub-pro">Nowy</span></a></li>
                                     <li><a title="lista" href="{{ path('listaParagonow') }}"><span class="mini-sub-pro">Lista</span></a></li>
                                 </ul>
                             </li>

@@ -1,5 +1,16 @@
 {% extends 'main.html.twig' %}
 {% block main_title %}Paragony - Lista{% endblock %}
 {% block body %}
-INDEX
+
+    <!-- Insert this where you want the table to appear -->
+    <div id="presidents">Loading...</div>
+
+    <!-- Insert this at the end of your body element, but before the closing tag -->
+    <script src="{{ asset('bundles/datatables/js/datatables.js') }}"></script>
+    <script>
+        $(function() {
+            $('#presidents').initDataTables({{ datatable_settings(datatable) }});
+        });
+    </script>
+
 {% endblock %}

@@ -6,3 +6,15 @@ div.main-container {
 input, select, button {
     color: black;
 }
+
+table.table tbody {
+    color: black;
+}
+
+.dataTables_wrapper a, .dataTables_wrapper label, div.dataTables_info {
+    color: white !important;
+}
+
+a.table-action {
+    color: #0B792F !important;
+}
