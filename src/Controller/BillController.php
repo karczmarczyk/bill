@@ -29,12 +29,13 @@ class BillController extends AbstractController {
      * @Route("/bill/index", name="listaParagonow")
      */
     public function index (Request $request, DataTableFactory $dataTableFactory) {
-        $table = $dataTableFactory->create()
+        $table = $dataTableFactory->create(['searching'=>true])
             ->add('id', NumberColumn::class, [
                 'label' => 'ID'
             ])
             ->add('shop', TextColumn::class, [
-                'label' => 'Sklep'
+                'label' => 'Sklep',
+                'searchable' => true, 'globalSearchable' => true, 'filter' => []
             ])
             ->add('date', DateTimeColumn::class, [
                 'label' => 'Data',

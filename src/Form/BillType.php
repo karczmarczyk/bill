@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Bill;
+use App\Entity\BillScan;
 use App\Entity\Position;
 use App\Form\PositionType;
 use Symfony\Component\Form\AbstractType;
@@ -30,7 +31,16 @@ class BillType extends AbstractType
             ->add('summary_brutto', NumberType::class)
             ->add('summary_netto', NumberType::class)
             ->add('positions', CollectionType::class, [
+                'label' => false,
                 'entry_type' => PositionType::class,
+                'entry_options' => ['label' => false],
+                'by_reference' => false,
+                'allow_add' => true,
+                'allow_delete' => true
+            ])
+            ->add('billScans', CollectionType::class, [
+                'label' => false,
+                'entry_type' => BillScanType::class,
                 'entry_options' => ['label' => false],
                 'by_reference' => false,
                 'allow_add' => true,

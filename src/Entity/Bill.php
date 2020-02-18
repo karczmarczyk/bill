@@ -43,9 +43,15 @@ class Bill
      */
     private $positions;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\BillScan", mappedBy="bill", cascade={"persist"})
+     */
+    private $billScans;
+
     public function __construct()
     {
         $this->positions = new ArrayCollection();
+        $this->billScans = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -126,6 +132,37 @@ class Bill
             // set the owning side to null (unless already changed)
             if ($position->getBill() === $this) {
                 $position->setBill(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|BillScan[]
+     */
+    public function getBillScans(): Collection
+    {
+        return $this->billScans;
+    }
+
+    public function addBillScan(BillScan $billScan): self
+    {
+        if (!$this->billScans->contains($billScan)) {
+            $this->billScans[] = $billScan;
+            $billScan->setBill($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBillScan(BillScan $billScan): self
+    {
+        if ($this->billScans->contains($billScan)) {
+            $this->billScans->removeElement($billScan);
+            // set the owning side to null (unless already changed)
+            if ($billScan->getBill() === $this) {
+                $billScan->setBill(null);
             }
         }
 
