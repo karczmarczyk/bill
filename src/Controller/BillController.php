@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Entity\BillScan;
+use App\Service\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -105,7 +106,7 @@ class BillController extends AbstractController {
      * 
      * @Route("/edit/{id}")
      */
-    public function editBill (Request $request, $id) {
+    public function editBill (Request $request, FileUploader $fileUploader, $id) {
         $bill = $this->getDoctrine()
             ->getRepository(Bill::class)
             ->find($id);
@@ -134,21 +135,12 @@ class BillController extends AbstractController {
                     $file = $billScan->get('billFile')->getData();
                     if ($file) {
                         $originalFilename = $file->getClientOriginalName();
-                        $safeFileName = md5($originalFilename . time());
-
-                        // Move the file to the directory where file are stored
-                        try {
-                            $file->move(
-                                $this->getParameter('bill_directory'),
-                                $safeFileName
-                            );
-
+                        $safeFileName = $fileUploader->upload($file);
+                        if ($safeFileName) {
                             $newBillScan = new BillScan();
                             $newBillScan->setFileName($safeFileName);
                             $newBillScan->setFileNameOrig($originalFilename);
                             $bill->addBillScan($newBillScan);
-                        } catch (FileException $e) {
-                            // ... handle exception if something happens during file upload
                         }
                     }
                 }
