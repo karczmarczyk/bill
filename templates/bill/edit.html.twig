@@ -44,10 +44,13 @@
             {# iterate over each existing tag and render its only field: name #}
             {% for billScan in form.billScans %}
                 <li>
-                    <div class="row">
-                        <div class="col-lg-3">{{ form_row(billScan.billFile) }}</div>
-                        <div class="col-lg-3">{{ form_row(billScan.fileName) }}</div>
-                        <div class="col-lg-3">{{ form_row(billScan.fileNameOrig) }}</div>
+                    <div class="row" style="">
+                        <div class="col-lg-9">
+                            <img style="width: 250px;" src="{{ path('paragonImg', { 'id': billScan.vars.value.id, 'hash':  billScan.vars.value.fileName}) }}" alt="{{ billScan.vars.value.fileNameOrig }}">
+                            <span style="display: none">{{ form_row(billScan.billFile) }}</span>
+                            {{ form_row(billScan.fileName) }}
+                            {{ form_row(billScan.fileNameOrig) }}
+                        </div>
                         <div class="col-lg-3 option-column"></div>
                     </div>
                 </li>

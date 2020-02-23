@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\BillScan;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -18,6 +19,7 @@ class BillScanType extends AbstractType
             ->add('billFile', FileType::class, [
                 "mapped" => false,
                 'required' => false,
+                'auto_initialize' => false,
                 'constraints' => [
                     new File([
                         'maxSize' => '2048k',
@@ -30,8 +32,12 @@ class BillScanType extends AbstractType
                     ])
                 ],
             ])
-            ->add("fileName", TextType::class)
-            ->add("fileNameOrig", TextType::class)
+            ->add("fileName", HiddenType::class, [
+                'required' => false
+            ])
+            ->add("fileNameOrig", HiddenType::class, [
+                'required' => false
+            ])
         ;
     }
 

@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller;
 
+use App\Entity\BillScan;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,6 +15,7 @@ use Omines\DataTablesBundle\Column\TextColumn;
 use Omines\DataTablesBundle\Column\NumberColumn;
 use Omines\DataTablesBundle\Column\DateTimeColumn;
 use Omines\DataTablesBundle\DataTableFactory;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 /**
  * Description of BillController
@@ -57,7 +59,17 @@ class BillController extends AbstractController {
         }
         return $this->render('bill/index.html.twig', ['datatable' => $table]);
     }
-    
+
+    /**
+     * Zwraca obrazek
+     * @Route("/bill/image/{id}/{hash}", name="paragonImg")
+     */
+    public function billImage ($id, $hash) {
+        $publicResourcesFolderPath = $this->getParameter('bill_directory');
+        $filename = $hash;
+        return new BinaryFileResponse($publicResourcesFolderPath.$filename);
+    }
+
     /**
      * Nowy paragon
      * 
@@ -102,12 +114,45 @@ class BillController extends AbstractController {
         foreach ($bill->getPositions() as $position) {
             $originalPositions->add($position);
         }
+        $originalBillScans = new ArrayCollection();
+        foreach ($bill->getBillScans() as $billScan) {
+            $originalBillScans->add($billScan);
+        }
         
         $form = $this->createForm(BillType::class, $bill);
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
             $bill = $form->getData();
+
+            //Przetwarzam uploadowane pliki
+
+            $billScans = $form->get('billScans')->all();
+            if ($billScans) {
+                $bill->clearUnsaved();
+                foreach ($billScans as $billScan) {
+                    $file = $billScan->get('billFile')->getData();
+                    if ($file) {
+                        $originalFilename = $file->getClientOriginalName();
+                        $safeFileName = md5($originalFilename . time());
+
+                        // Move the file to the directory where file are stored
+                        try {
+                            $file->move(
+                                $this->getParameter('bill_directory'),
+                                $safeFileName
+                            );
+
+                            $newBillScan = new BillScan();
+                            $newBillScan->setFileName($safeFileName);
+                            $newBillScan->setFileNameOrig($originalFilename);
+                            $bill->addBillScan($newBillScan);
+                        } catch (FileException $e) {
+                            // ... handle exception if something happens during file upload
+                        }
+                    }
+                }
+            }
 
             $entityManager = $this->getDoctrine()->getManager();
 
@@ -117,6 +162,13 @@ class BillController extends AbstractController {
                     $entityManager->persist($position);
                 }
             }
+            foreach ($originalBillScans as $billScan) {
+                if (false === $bill->getBillScans()->contains($billScan)) {
+                    $bill->removeBillScan($billScan);
+                    $entityManager->persist($billScan);
+                }
+            }
+
             
             $entityManager->persist($bill);
             $entityManager->flush();
@@ -125,10 +177,13 @@ class BillController extends AbstractController {
                 'success',
                 'Zapisano paragon!'
             );
+            return $this->redirect("/edit/".$id);
         }
-        
+
         return $this->render('bill/edit.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'bill' => $bill,
+            'id' => $id
         ]);
     }
 }

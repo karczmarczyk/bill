@@ -39,6 +39,7 @@ class BillType extends AbstractType
                 'allow_delete' => true
             ])
             ->add('billScans', CollectionType::class, [
+                //"mapped" => false,
                 'label' => false,
                 'entry_type' => BillScanType::class,
                 'entry_options' => ['label' => false],
