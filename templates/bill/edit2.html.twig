@@ -3,7 +3,7 @@
 
 {% block body %}
 
-{{ form_start(form) }}
+{{ form_start(form, {'attr': {'id': 'bill_form'}}) }}
     <div class="my-custom-class-for-errors">
         {{ form_errors(form) }}
     </div>
@@ -39,39 +39,37 @@
         </ul>
     </div>
 
-    <div class="row">
-        <ul class="billScans" data-prototype='{% include 'bill/_newRowScan.html.twig' %}'>
-            {# iterate over each existing tag and render its only field: name #}
-            {% for billScan in form.billScans %}
-                <li>
-                    <div class="row" style="">
-                        <div class="col-lg-9">
-                            <img style="width: 250px;" src="{{ path('paragonImg', { 'id': billScan.vars.value.id, 'hash':  billScan.vars.value.fileName}) }}" alt="{{ billScan.vars.value.fileNameOrig }}">
-                            <span style="display: none">{{ form_row(billScan.billFile) }}</span>
-                            {{ form_row(billScan.fileName) }}
-                            {{ form_row(billScan.fileNameOrig) }}
-                        </div>
-                        <div class="col-lg-3 option-column"></div>
-                    </div>
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
-
     <div style="margin-bottom: 10px;"></div>        
+    
+{{ form_end(form) }}
 
-    <input type="submit" class="btn btn-primary" value="Save" />
+{{ form_start(formDropFile, {
+    'attr': {
+        'id': 'billDropzone',
+        'class': 'dropzone',
+        'name': 'billScan',
+        'action': path('uploadScan',{'id':id})
+    }
+}) }}
+    {{ form_row(formDropFile._token) }}
+</form>{#{{ form_end(formDropFile) }}#}
 
-{{ form_end(form) }}    
+<input id="submit_form" style="margin-top:20px" type="button" class="btn btn-primary" value="Save" />
     
 
 
 <script>
     jQuery(document).ready(function() {
         var positions = new collectionForm('ul.positions');
-        var billScans = new collectionForm('ul.billScans');
+
+        jQuery('#submit_form').click(function(){
+            jQuery('#bill_form').submit();
+        });
     });
 
+    Dropzone.options.billDropzone = {
+        paramName: "billScan[billFile]", // The name that will be used to transfer the file
+    };
     
 </script>
 

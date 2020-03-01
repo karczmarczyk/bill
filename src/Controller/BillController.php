@@ -2,12 +2,15 @@
 namespace App\Controller;
 
 use App\Entity\BillScan;
+use App\Form\BillScanType;
 use App\Service\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Bill;
 use App\Form\BillType;
+use App\Form\BillWithScansType;
 use Doctrine\Common\Collections\ArrayCollection;
 use Omines\DataTablesBundle\Adapter\ArrayAdapter;
 use Omines\DataTablesBundle\Adapter\Doctrine\ORMAdapter;
@@ -110,7 +113,7 @@ class BillController extends AbstractController {
         $bill = $this->getDoctrine()
             ->getRepository(Bill::class)
             ->find($id);
-                
+
         $originalPositions = new ArrayCollection();
         foreach ($bill->getPositions() as $position) {
             $originalPositions->add($position);
@@ -119,10 +122,10 @@ class BillController extends AbstractController {
         foreach ($bill->getBillScans() as $billScan) {
             $originalBillScans->add($billScan);
         }
-        
-        $form = $this->createForm(BillType::class, $bill);
+
+        $form = $this->createForm(BillWithScansType::class, $bill);
         $form->handleRequest($request);
-        
+
         if ($form->isSubmitted() && $form->isValid()) {
             $bill = $form->getData();
 
@@ -177,5 +180,85 @@ class BillController extends AbstractController {
             'bill' => $bill,
             'id' => $id
         ]);
+    }
+
+    /**
+     * Edycja paragonu 2
+     *
+     * @Route("/edit2/{id}")
+     */
+    public function edit2Bill (Request $request, $id) {
+        $bill = $this->getDoctrine()
+            ->getRepository(Bill::class)
+            ->find($id);
+
+        $originalPositions = new ArrayCollection();
+        foreach ($bill->getPositions() as $position) {
+            $originalPositions->add($position);
+        }
+
+        $form = $this->createForm(BillType::class, $bill);
+        $form->handleRequest($request);
+
+        $formDropFile = $this->createForm(BillScanType::class, new BillScan());
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $bill = $form->getData();
+
+            $entityManager = $this->getDoctrine()->getManager();
+
+            foreach ($originalPositions as $position) {
+                if (false === $bill->getPositions()->contains($position)) {
+                    $bill->removePosition($position);
+                    $entityManager->persist($position);
+                }
+            }
+
+
+            $entityManager->persist($bill);
+            $entityManager->flush();
+
+            $this->addFlash(
+                'success',
+                'Zapisano paragon!'
+            );
+            return $this->redirect("/edit2/".$id);
+        }
+
+        return $this->render('bill/edit2.html.twig', [
+            'form' => $form->createView(),
+            'formDropFile' => $formDropFile->createView(),
+            'bill' => $bill,
+            'id' => $id
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @param $id
+     *
+     * @Route("uploadScan/{id}", name="uploadScan", methods={"POST"})
+     */
+    public function uploadScan (Request $request, $id) {
+        $bill = $this->getDoctrine()
+            ->getRepository(Bill::class)
+            ->find($id);
+
+        var_dump($_POST);
+        var_dump($_FILES);
+
+        $form = $this->createForm(BillScanType::class, new BillScan());
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            echo "OK"; exit;
+        } else {
+            echo "ERROR ".count($form->getErrors());
+            foreach ($form->getErrors() as $error) {
+                echo $error->getMessage(); echo "<br>";
+            }
+        }
+
+        return new Response();
     }
 }
