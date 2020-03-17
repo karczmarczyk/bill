@@ -9,8 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\BillRepository")
  */
-class
-Bill
+class Bill
 {
     /**
      * @ORM\Id()
@@ -170,7 +169,8 @@ Bill
         return $this;
     }
 
-    public function clearUnsaved (): self {
+    public function clearUnsaved(): self
+    {
         foreach ($this->billScans as $billScan) {
             if ($billScan->getId()==null) {
                 $this->removeBillScan($billScan);

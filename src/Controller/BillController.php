@@ -26,15 +26,17 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
  *
  * @author mateusz
  */
-class BillController extends AbstractController {
+class BillController extends AbstractController
+{
     
     /**
      * Lista paragonów
-     * 
+     *
      * @Route("/")
      * @Route("/bill/index", name="listaParagonow")
      */
-    public function index (Request $request, DataTableFactory $dataTableFactory) {
+    public function index(Request $request, DataTableFactory $dataTableFactory)
+    {
         $table = $dataTableFactory->create(['searching'=>true])
             ->add('id', NumberColumn::class, [
                 'label' => 'ID'
@@ -68,7 +70,8 @@ class BillController extends AbstractController {
      * Zwraca obrazek
      * @Route("/bill/image/{id}/{hash}", name="paragonImg")
      */
-    public function billImage ($id, $hash) {
+    public function billImage($id, $hash)
+    {
         $publicResourcesFolderPath = $this->getParameter('bill_directory');
         $filename = $hash;
         return new BinaryFileResponse($publicResourcesFolderPath.$filename);
@@ -76,11 +79,11 @@ class BillController extends AbstractController {
 
     /**
      * Nowy paragon
-     * 
+     *
      * @Route("/new", name="nowyParagon")
      */
-    public function newBill (Request $request) {
-        
+    public function newBill(Request $request)
+    {
         $entityManager = $this->getDoctrine()->getManager();
 
         $bill = new Bill();
@@ -106,10 +109,11 @@ class BillController extends AbstractController {
     
     /**
      * Edycja paragonu
-     * 
+     *
      * @Route("/edit/{id}")
      */
-    public function editBill (Request $request, FileUploader $fileUploader, $id) {
+    public function editBill(Request $request, FileUploader $fileUploader, $id)
+    {
         $bill = $this->getDoctrine()
             ->getRepository(Bill::class)
             ->find($id);
@@ -187,7 +191,8 @@ class BillController extends AbstractController {
      *
      * @Route("/edit2/{id}")
      */
-    public function edit2Bill (Request $request, $id) {
+    public function edit2Bill(Request $request, $id)
+    {
         $bill = $this->getDoctrine()
             ->getRepository(Bill::class)
             ->find($id);
@@ -239,7 +244,8 @@ class BillController extends AbstractController {
      *
      * @Route("uploadScan/{id}", name="uploadScan", methods={"POST"})
      */
-    public function uploadScan (Request $request, $id) {
+    public function uploadScan(Request $request, $id)
+    {
         $bill = $this->getDoctrine()
             ->getRepository(Bill::class)
             ->find($id);
@@ -251,11 +257,13 @@ class BillController extends AbstractController {
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            echo "OK"; exit;
+            echo "OK";
+            exit;
         } else {
             echo "ERROR ".count($form->getErrors());
             foreach ($form->getErrors() as $error) {
-                echo $error->getMessage(); echo "<br>";
+                echo $error->getMessage();
+                echo "<br>";
             }
         }
 

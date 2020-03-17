@@ -3,7 +3,6 @@
 
 namespace App\Service;
 
-
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class FileUploader
@@ -15,7 +14,8 @@ class FileUploader
         $this->targetDirectory = $targetDirectory;
     }
 
-    public function upload (UploadedFile $file) {
+    public function upload(UploadedFile $file)
+    {
         $originalFilename = $file->getClientOriginalName();
         $safeFileName = md5($originalFilename . time());
 
