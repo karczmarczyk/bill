@@ -1,10 +1,10 @@
-div.main-container {
-   text-align: justify;
-   color: white;
+body {
+    background-image: url("/images/bg.jpeg");
+    background-size: 100%;
 }
 
-input, select, button {
-    color: black;
+div.main-container {
+    margin-top: 44px;
 }
 
 table.table tbody {
@@ -12,7 +12,7 @@ table.table tbody {
 }
 
 .dataTables_wrapper a, .dataTables_wrapper label, div.dataTables_info {
-    color: white !important;
+    color: black !important;
 }
 
 a.table-action {

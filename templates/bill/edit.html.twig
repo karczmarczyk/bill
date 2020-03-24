@@ -1,7 +1,7 @@
-{% extends 'main.html.twig' %}
-{% block main_title %}Paragony - Lista{% endblock %}
+{% extends 'main_body.html.twig' %}
+{% block main_title %}Paragony - Edycja{% endblock %}
 
-{% block body %}
+{% block main_content %}
 
 {{ form_start(form) }}
     <div class="my-custom-class-for-errors">
@@ -9,16 +9,16 @@
     </div>
 
     <div class="row">
-        <div class="col">
+        <div class="col-lg-12">
             {{ form_row(form.shop) }}
         </div>
-        <div class="col">
+        <div class="col-lg-12">
             {{ form_row(form.date) }}
         </div>
-        <div class="col">
+        <div class="col-lg-12">
             {{ form_row(form.summary_brutto) }}
         </div>
-        <div class="col">
+        <div class="col-lg-12">
             {{ form_row(form.summary_netto) }}
         </div>
     </div>

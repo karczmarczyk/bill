@@ -1,334 +1,86 @@
-<!doctype html>
-<html class="no-js" lang="en">
-
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>{{ block('main_title') }}</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- favicon
-                    ============================================ -->
-        <link rel="shortcut icon" type="image/x-icon" href="/nalika/img/favicon.ico">
-        <!-- Google Fonts
-                    ============================================ -->
-        <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
-        <!-- Bootstrap CSS
-                    ============================================ -->
-        <link rel="stylesheet" href="/nalika/css/bootstrap.min.css">
-        <!-- Bootstrap CSS
-                    ============================================ -->
-        <link rel="stylesheet" href="/nalika/css/font-awesome.min.css">
-        <!-- nalika Icon CSS
+<!DOCTYPE html>
+<html>
+<head>
+{#    https://www.w3schools.com/w3css/tryit.asp?filename=tryw3css_templates_analytics&stacked=h#}
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>{% block main_title %}Paragony{% endblock %}</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+    </style>
+    <!-- favicon
                 ============================================ -->
-        <link rel="stylesheet" href="/nalika/css/nalika-icon.css">
-        <!-- owl.carousel CSS
-                    ============================================ -->
-        <link rel="stylesheet" href="/nalika/css/owl.carousel.css">
-        <link rel="stylesheet" href="/nalika/css/owl.theme.css">
-        <link rel="stylesheet" href="/nalika/css/owl.transitions.css">
-        <!-- animate CSS
-                    ============================================ -->
-        <link rel="stylesheet" href="/nalika/css/animate.css">
-        <!-- normalize CSS
-                    ============================================ -->
-        <link rel="stylesheet" href="/nalika/css/normalize.css">
-        <!-- meanmenu icon CSS
-                    ============================================ -->
-        <link rel="stylesheet" href="/nalika/css/meanmenu.min.css">
-        <!-- main CSS
-                    ============================================ -->
-        <link rel="stylesheet" href="/nalika/css/main.css">
-        <!-- morrisjs CSS
-                    ============================================ -->
-        <link rel="stylesheet" href="/nalika/css/morrisjs/morris.css">
-        <!-- mCustomScrollbar CSS
-                    ============================================ -->
-        <link rel="stylesheet" href="/nalika/css/scrollbar/jquery.mCustomScrollbar.min.css">
-        <!-- metisMenu CSS
-                    ============================================ -->
-        <link rel="stylesheet" href="/nalika/css/metisMenu/metisMenu.min.css">
-        <link rel="stylesheet" href="/nalika/css/metisMenu/metisMenu-vertical.css">
-        <!-- calendar CSS
-                    ============================================ -->
-        <link rel="stylesheet" href="/nalika/css/calendar/fullcalendar.min.css">
-        <link rel="stylesheet" href="/nalika/css/calendar/fullcalendar.print.min.css">
-        <!-- style CSS
-                    ============================================ -->
-        <link rel="stylesheet" href="/nalika/css/datapicker/datepicker3.css">
-        <link rel="stylesheet" href="/nalika/style.css">
-        <link rel="stylesheet" href="/css/style.css">
-        <!-- responsive CSS
-                    ============================================ -->
-        <link rel="stylesheet" href="/nalika/css/responsive.css">
+    <link rel="shortcut icon" type="image/x-icon" href="/nalika/img/favicon.ico">
 
-        <!-- jquery
-                ============================================ -->
-        <script src="/nalika/js/vendor/jquery-1.12.4.min.js"></script>
-        
-        <!-- modernizr JS
-                    ============================================ -->
-        <script src="/nalika/js/vendor/modernizr-2.8.3.min.js"></script>
+    <!-- in the <head> section -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jq-3.2.1/dt-1.10.16/datatables.min.css"/>
 
-        <!-- in the <head> section -->
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jq-3.2.1/dt-1.10.16/datatables.min.css"/>
+    <!-- before the closing <body> tag -->
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jq-3.2.1/dt-1.10.16/datatables.min.js"></script>
 
-        <!-- before the closing <body> tag -->
-        <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jq-3.2.1/dt-1.10.16/datatables.min.js"></script>
+    <script type="text/javascript" src="/js/collectionForm.js"></script>
 
-        <script type="text/javascript" src="/js/collectionForm.js"></script>
+    <script type="text/javascript" src="/dropzone/dropzone.js"></script>
+    <link rel="stylesheet" href="/dropzone/dropzone.css">
 
-        <script type="text/javascript" src="/dropzone/dropzone.js"></script>
-        <link rel="stylesheet" href="/dropzone/dropzone.css">
-    </head>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap-grid.css">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap-reboot.css">
+    <link rel="stylesheet" href="/bootstrap-datepicker/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="/bootstrap-datepicker/css/bootstrap-datepicker3.css">
+</head>
+<body class="w3-light-grey">
 
-    <body>
-        <!--[if lt IE 8]>
-                <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-            <![endif]-->
+<!-- Top container -->
+<div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
+    <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
+    <span class="w3-bar-item w3-right">Logo</span>
+</div>
 
-        <div class="left-sidebar-pro">
-            <nav id="sidebar" class="">
-                <div class="sidebar-header">
-                    <a href="index.html" style="color:white; font-size: 18px; text-align: left;">
-                        <img class="main-logo" src="/nalika/img/logo/logosn.png" alt="" />
-                        PARAGONY
-                    </a>
-                    <strong><img src="/nalika/img/logo/logosn.png" alt="" /></strong>
-                </div>
-                <div class="left-custom-menu-adp-wrap comment-scrollbar">
-                    <nav class="sidebar-nav left-sidebar-menu-pro">
-                        <ul class="metismenu" id="menu1">
-                            <li class="active">
-                                <a class="has-arrow" href="index.html">
-                                    <i class="icon nalika-home icon-wrap"></i>
-                                    <span class="mini-click-non">Paragony</span>
-                                </a>
-                                <ul class="submenu-angle" aria-expanded="true">
-                                    <li><a title="nowy" href="{{ path('nowyParagon') }}"><span class="mini-sub-pro">Nowy</span></a></li>
-                                    <li><a title="lista" href="{{ path('listaParagonow') }}"><span class="mini-sub-pro">Lista</span></a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </nav>
-        </div>
-        <!-- Start Welcome area -->
-        <div class="all-content-wrapper">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="logo-pro">
-                            <a href="index.html"><img class="main-logo" src="/nalika/img/logo/logo.png" alt="" /></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="header-advance-area">
-                <div class="header-top-area">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <div class="header-top-wraper">
-                                    <div class="row">
-                                        <div class="col-lg-1 col-md-0 col-sm-1 col-xs-12">
-                                            <div class="menu-switcher-pro">
-                                                <button type="button" id="sidebarCollapse" class="btn bar-button-pro header-drl-controller-btn btn-info navbar-btn">
-                                                    <i class="icon nalika-menu-task"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-7 col-sm-6 col-xs-12">
-                                            <div class="header-top-menu tabl-d-n hd-search-rp">
-                                                <div class="breadcome-heading">
-                                                    <form role="search" class="">
-                                                        <input type="text" placeholder="Search..." class="form-control">
-                                                        <a href=""><i class="fa fa-search"></i></a>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        {#                                        {% include 'top_right.html.twig' %}#}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Mobile Menu start -->
-                <div class="mobile-menu-area">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <div class="mobile-menu">
-                                    <nav id="dropdown">
-                                        <ul class="mobile-menu-nav">
-                                            <li><a data-toggle="collapse" data-target="#Charts" href="#">Paragony <span class="admin-project-icon nalika-icon nalika-down-arrow"></span></a>
-                                                <ul class="collapse dropdown-header-top">
-                                                    <li><a href="index.html">Lista</a></li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </nav>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Mobile Menu end -->
-                <div class="breadcome-area">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <div class="breadcome-list">
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                            <div class="breadcomb-wp">
-                                                <div class="breadcomb-icon">
-                                                    <i class="icon nalika-home"></i>
-                                                </div>
-                                                <div class="breadcomb-ctn">
-                                                    <h2>{% block main_title %}Paragony{% endblock %}</h2>
-                                                    <p>Witaj w systemie paragonów <span class="bread-ntd"></span></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                            <div class="breadcomb-report">
-                                                {#                                                <button data-toggle="tooltip" data-placement="left" title="Download Report" class="btn"><i class="icon nalika-download"></i></button>#}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="section-admin container-fluid">
-                <div class="row admin text-center">
-                    <div class="col-md-12">
-                        <div class="row">
+<div class="main-container">
+{% block body %}{% endblock %}
+</div>
 
-                            <div class="product-sales-area mg-tb-30">
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                            <div class="analytics-info-cs main-container ">
-                                                {# read and display just one flash message type #}
-                                                {% for message in app.flashes('notice') %}
-                                                    <div class="flash-notice">
-                                                        {{ message }}
-                                                    </div>
-                                                {% endfor %}
+<script src="/bootstrap/js/bootstrap.js"></script>
+<script src="/bootstrap/js/bootstrap.bundle.js"></script>
+<script src="/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script>
+    // Get the Sidebar
+    var mySidebar = document.getElementById("mySidebar");
 
-                                                {# read and display several types of flash messages #}
-                                                {% for label, messages in app.flashes(['success', 'warning']) %}
-                                                    {% for message in messages %}
-                                                        <div class="flash-{{ label }}">
-                                                            {{ message }}
-                                                        </div>
-                                                    {% endfor %}
-                                                {% endfor %}
+    // Get the DIV with overlay effect
+    var overlayBg = document.getElementById("myOverlay");
 
-                                                {# read and display all flash messages #}
-                                                {% for label, messages in app.flashes %}
-                                                    {% for message in messages %}
-                                                        <div class="flash-{{ label }}">
-                                                            {{ message }}
-                                                        </div>
-                                                    {% endfor %}
-                                                {% endfor %}
-                                                
-                                                {% block body %}{% endblock %}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+    // Toggle between showing and hiding the sidebar, and add overlay effect
+    function w3_open() {
+        if (mySidebar.style.display === 'block') {
+            mySidebar.style.display = 'none';
+            overlayBg.style.display = "none";
+        } else {
+            mySidebar.style.display = 'block';
+            overlayBg.style.display = "block";
+        }
+    }
 
-                    </div>    
-                </div>
-            </div>
-        </div>
+    // Close the sidebar with the close button
+    function w3_close() {
+        mySidebar.style.display = "none";
+        overlayBg.style.display = "none";
+    }
+</script>
 
-
-        <div class="footer-copyright-area">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="footer-copy-right">
-                            <p>Copyright © 2018 <a href="https://colorlib.com/wp/templates/">Colorlib</a> All rights reserved.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- bootstrap JS
-                ============================================ -->
-    <script src="/nalika/js/bootstrap.min.js"></script>
-    <!-- wow JS
-                ============================================ -->
-    <script src="/nalika/js/wow.min.js"></script>
-    <!-- price-slider JS
-                ============================================ -->
-    <script src="/nalika/js/jquery-price-slider.js"></script>
-    <!-- meanmenu JS
-                ============================================ -->
-    <script src="/nalika/js/jquery.meanmenu.js"></script>
-    <!-- owl.carousel JS
-                ============================================ -->
-    <script src="/nalika/js/owl.carousel.min.js"></script>
-    <!-- sticky JS
-                ============================================ -->
-    <script src="/nalika/js/jquery.sticky.js"></script>
-
-    <script src="/nalika/js/datapicker/bootstrap-datepicker.js"></script>
-    <script src="/nalika/js/datapicker/datepicker-active.js"></script>
-
-    <!-- scrollUp JS
-                ============================================ -->
-    <script src="/nalika/js/jquery.scrollUp.min.js"></script>
-    <!-- mCustomScrollbar JS
-                ============================================ -->
-    <script src="/nalika/js/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
-    <script src="/nalika/js/scrollbar/mCustomScrollbar-active.js"></script>
-    <!-- metisMenu JS
-                ============================================ -->
-    <script src="/nalika/js/metisMenu/metisMenu.min.js"></script>
-    <script src="/nalika/js/metisMenu/metisMenu-active.js"></script>
-    <!-- sparkline JS
-                ============================================ -->
-    <script src="/nalika/js/sparkline/jquery.sparkline.min.js"></script>
-    <script src="/nalika/js/sparkline/jquery.charts-sparkline.js"></script>
-    <!-- calendar JS
-                ============================================ -->
-    <script src="/nalika/js/calendar/moment.min.js"></script>
-    <script src="/nalika/js/calendar/fullcalendar.min.js"></script>
-    <script src="/nalika/js/calendar/fullcalendar-active.js"></script>
-    <!-- float JS
-            ============================================ -->
-    <script src="/nalika/js/flot/jquery.flot.js"></script>
-    <script src="/nalika/js/flot/jquery.flot.resize.js"></script>
-    <script src="/nalika/js/flot/curvedLines.js"></script>
-    <script src="/nalika/js/flot/flot-active.js"></script>
-    <!-- plugins JS
-                ============================================ -->
-    <script src="/nalika/js/plugins.js"></script>
-    <!-- main JS
-                ============================================ -->
-    <script src="/nalika/js/main.js"></script>
-
-    <script>
-        $(document).ready(function() {
-            $('.js-datepicker').datepicker({
-                format: 'yyyy-mm-dd'
-            });
+<script>
+    $(document).ready(function() {
+        $('.js-datepicker').datepicker({
+            format: 'yyyy-mm-dd'
         });
-    </script>
+    });
+</script>
 </body>
-
 </html>

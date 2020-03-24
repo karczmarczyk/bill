@@ -110,7 +110,7 @@ class BillController extends AbstractController
     /**
      * Edycja paragonu
      *
-     * @Route("/edit/{id}")
+     * @Route("/edit/{id}", name="edytujParagon")
      */
     public function editBill(Request $request, FileUploader $fileUploader, $id)
     {
