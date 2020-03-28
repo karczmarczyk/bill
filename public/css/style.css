@@ -1,6 +1,7 @@
 body {
-    background-image: url("/images/bg.jpeg");
+    /*background-image: url("/images/bg.jpeg");*/
     background-size: 100%;
+    background-color: #efefef !important;
 }
 
 div.main-container {
@@ -17,4 +18,18 @@ table.table tbody {
 
 a.table-action {
     color: #0B792F !important;
+}
+
+th {
+    background-color: #666;
+    color:white;
+}
+
+tr:hover td {
+    background-color: #0f6674;
+    color: white;
+}
+
+tr:hover td a{
+    color: yellow !important;
 }

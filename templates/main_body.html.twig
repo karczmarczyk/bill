@@ -2,7 +2,7 @@
 
 {% block body %}
 <!-- Sidebar/menu -->
-{% include 'nav.html.twig' %}#}
+{% include 'nav.html.twig' %}
 {% block nav %}{% endblock %}
 
 
@@ -12,35 +12,28 @@
 <!-- !PAGE CONTENT! -->
 <div class="w3-main" style="margin-left:300px;">
 
+    <div class="w3-container" style="padding-top:20px;">
+        {# read and display just one flash message type #}
+        {% for message in app.flashes('notice') %}
+            <div class="alert alert-warning" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        {# read and display several types of flash messages #}
+        {% for label, messages in app.flashes(['success', 'warning']) %}
+            {% for message in messages %}
+                <div class="alert alert-{{ label }}" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+
     <!-- Header -->
     <header class="w3-container" style="padding-top:22px">
         <h5><b><i class="fa fa-dashboard"></i>{% block main_title %}Paragony{% endblock %}</b></h5>
     </header>
-
-    {# read and display just one flash message type #}
-    {% for message in app.flashes('notice') %}
-        <div class="flash-notice">
-            {{ message }}
-        </div>
-    {% endfor %}
-
-    {# read and display several types of flash messages #}
-    {% for label, messages in app.flashes(['success', 'warning']) %}
-        {% for message in messages %}
-            <div class="flash-{{ label }}">
-                {{ message }}
-            </div>
-        {% endfor %}
-    {% endfor %}
-
-    {# read and display all flash messages #}
-    {% for label, messages in app.flashes %}
-        {% for message in messages %}
-            <div class="flash-{{ label }}">
-                {{ message }}
-            </div>
-        {% endfor %}
-    {% endfor %}
 
     <div class="w3-container">
         {% block main_content %}{% endblock %}

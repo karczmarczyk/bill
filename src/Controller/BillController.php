@@ -32,7 +32,7 @@ class BillController extends AbstractController
     /**
      * Lista paragonów
      *
-     * @Route("/")
+     * @Route("/", name="app_main")
      * @Route("/bill/index", name="listaParagonow")
      */
     public function index(Request $request, DataTableFactory $dataTableFactory)
@@ -52,7 +52,7 @@ class BillController extends AbstractController
             ->add("actions", TextColumn::class, [
                 'label' => "Opcje",
                 'render' => function ($value, $context) {
-                    return sprintf('<a class="table-action" href="/edit/%s">%s</a>', $context->getId(), "Edit");
+                    return sprintf('<a class="table-action" href="/edit/%s">%s</a>', $context->getId(), "<i class=\"fa fa-edit\"></i> EDYTUJ");
                 }
             ])
             ->createAdapter(ORMAdapter::class, [
