@@ -2,6 +2,8 @@
 
 namespace App\Form;
 
+use App\Entity\User;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -31,7 +33,10 @@ class RegistrationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            // Configure your form options here
+            'data_class' => User::class,
+            'constraints' => [
+                new UniqueEntity(['fields' => ['email'], 'entityClass' => User::class])
+            ]
         ]);
     }
 }

@@ -21,14 +21,12 @@ class RegistrationController extends AbstractController
         $form = $this->createForm(RegistrationType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
+            $user = $form->getData();
             $entityManager = $this->getDoctrine()->getManager();
 
-            $user = new User();
-            $user->setEmail($data['email']);
             $user->setPassword($passwordEncoder->encodePassword(
                 $user,
-                $data['password']
+                $user->getPassword()
             ));
             $user->setRoles(['USER_ROLE']);
 
