@@ -17,15 +17,21 @@ class BillType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('shop', TextType::class)
+            ->add('shop', TextType::class, [
+                'label' => "Nazwa sklepu"
+            ])
             ->add('date', DateType::class, [
-                'label' => false,
+                'label' => "Data zakupów",
                 'widget' => 'single_text',
                 'attr' => ['class' => 'js-datepicker'],
                 'html5' => false
             ])
-            ->add('summary_brutto', NumberType::class)
-            ->add('summary_netto', NumberType::class)
+            ->add('summary_brutto', NumberType::class, [
+                'label' => 'Suma BRUTTO'
+            ])
+            ->add('summary_netto', NumberType::class, [
+                'label' => 'Suma NETTO'
+            ])
             ->add('positions', CollectionType::class, [
                 'label' => false,
                 'entry_type' => PositionType::class,

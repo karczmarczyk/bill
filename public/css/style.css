@@ -1,35 +1,39 @@
 body {
-    /*background-image: url("/images/bg.jpeg");*/
-    background-size: 100%;
-    background-color: #efefef !important;
+  /*background-image: url("/images/bg.jpeg");*/
+  background-size: 100%;
+  background-color: #efefef !important;
+}
+body header h5 {
+  font-weight: bold;
+  border-bottom: 3px solid darkorange;
+  padding-bottom: 10px;
+  margin-bottom: 50px;
+}
+body div.main-container {
+  margin-top: 44px;
+}
+body .dataTables_wrapper a, body .dataTables_wrapper label, body div.dataTables_info {
+  color: black !important;
+}
+body a.table-action {
+  color: #0B792F !important;
+}
+body table.table tbody {
+  color: black;
+}
+body table.table tbody th {
+  background-color: #666;
+  color: white;
+}
+body table.table tbody tr.new-row td {
+  background: #8fd19e;
+}
+body table.table tbody tr:hover td {
+  background-color: #0f6674;
+  color: white;
+}
+body table.table tbody tr:hover td a {
+  color: yellow !important;
 }
 
-div.main-container {
-    margin-top: 44px;
-}
-
-table.table tbody {
-    color: black;
-}
-
-.dataTables_wrapper a, .dataTables_wrapper label, div.dataTables_info {
-    color: black !important;
-}
-
-a.table-action {
-    color: #0B792F !important;
-}
-
-th {
-    background-color: #666;
-    color:white;
-}
-
-tr:hover td {
-    background-color: #0f6674;
-    color: white;
-}
-
-tr:hover td a{
-    color: yellow !important;
-}
+/*# sourceMappingURL=style.css.map */

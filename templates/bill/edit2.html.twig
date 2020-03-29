@@ -1,5 +1,5 @@
 {% extends 'main_body.html.twig' %}
-{% block main_title %}Paragony - Lista{% endblock %}
+{% block main_title %}Paragony - Edycja{% endblock %}
 
 {% block main_content %}
 
@@ -9,34 +9,40 @@
     </div>
 
     <div class="row">
-        <div class="col">
+        <div class="col-lg-9">
             {{ form_row(form.shop) }}
         </div>
-        <div class="col">
+        <div class="col-lg-3">
             {{ form_row(form.date) }}
         </div>
-        <div class="col">
+        <div class="col-lg-6">
             {{ form_row(form.summary_brutto) }}
         </div>
-        <div class="col">
+        <div class="col-lg-6">
             {{ form_row(form.summary_netto) }}
         </div>
     </div>
 
     <div class="row">
-        <ul class="positions" data-prototype='{% include 'bill/_newRow.html.twig' %}'>
-            {# iterate over each existing tag and render its only field: name #}
-            {% for position in form.positions %}
-                <li>
-                    <div class="row">
-                        <div class="col-lg-3">{{ form_row(position.name) }}</div>
-                        <div class="col-lg-3">{{ form_row(position.brutto) }}</div>
-                        <div class="col-lg-3">{{ form_row(position.netto) }}</div>
-                        <div class="col-lg-3 option-column"></div>
-                    </div>
-                </li>
-            {% endfor %}
-        </ul>
+        <div class="col-lg-12">
+            <table class="table positions" data-prototype='{% include 'bill/_newRow.html.twig' %}'>
+                <tr>
+                    <th>Nazwa</th>
+                    <th>Brutto</th>
+                    <th>Netto</th>
+                    <th>Operacje</th>
+                </tr>
+                {# iterate over each existing tag and render its only field: name #}
+                {% for position in form.positions %}
+                    <tr>
+                        <td>{{ form_widget(position.name) }}</td>
+                        <td>{{ form_widget(position.brutto) }}</td>
+                        <td>{{ form_widget(position.netto) }}</td>
+                        <td class="option-column"></td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
     </div>
 
     <div style="margin-bottom: 10px;"></div>        
@@ -54,13 +60,13 @@
     {{ form_row(formDropFile._token) }}
 </form>{#{{ form_end(formDropFile) }}#}
 
-<input id="submit_form" style="margin-top:20px" type="button" class="btn btn-primary" value="Save" />
+<input id="submit_form" style="margin-top:20px" type="button" class="btn btn-primary" value="ZAPISZ" />
     
 
 
 <script>
     jQuery(document).ready(function() {
-        var positions = new collectionForm('ul.positions');
+        var positions = new collectionFormTable('table.positions');
 
         jQuery('#submit_form').click(function(){
             jQuery('#bill_form').submit();

@@ -110,7 +110,7 @@ class BillController extends AbstractController
     /**
      * Edycja paragonu
      *
-     * @Route("/edit/{id}", name="edytujParagon")
+     * @Route("/edit2/{id}", name="edytujParagon")
      */
     public function editBill(Request $request, FileUploader $fileUploader, $id)
     {
@@ -189,7 +189,7 @@ class BillController extends AbstractController
     /**
      * Edycja paragonu 2
      *
-     * @Route("/edit2/{id}")
+     * @Route("/edit/{id}")
      */
     public function edit2Bill(Request $request, $id)
     {
@@ -227,7 +227,7 @@ class BillController extends AbstractController
                 'success',
                 'Zapisano paragon!'
             );
-            return $this->redirect("/edit2/".$id);
+            return $this->redirect("/edit/".$id);
         }
 
         return $this->render('bill/edit2.html.twig', [

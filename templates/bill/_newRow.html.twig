@@ -1,7 +1,7 @@
 {# empty Twig template #}
-<div class="row">
-    <div class="col-lg-3">{{ form_row(form.positions.vars.prototype.name)|e('html_attr') }}</div>
-    <div class="col-lg-3">{{ form_row(form.positions.vars.prototype.brutto)|e('html_attr') }}</div>
-    <div class="col-lg-3">{{ form_row(form.positions.vars.prototype.netto)|e('html_attr') }}</div>
-    <div class="col-lg-3 option-column"></div>
-</div>
+<tr class="new-row">
+    <td>{{ form_widget(form.positions.vars.prototype.name)|e('html_attr') }}</td>
+    <td>{{ form_widget(form.positions.vars.prototype.brutto)|e('html_attr') }}</td>
+    <td>{{ form_widget(form.positions.vars.prototype.netto)|e('html_attr') }}</td>
+    <td class="option-column"></td>
+</tr>
