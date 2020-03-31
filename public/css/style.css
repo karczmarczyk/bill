@@ -18,12 +18,12 @@ body .dataTables_wrapper a, body .dataTables_wrapper label, body div.dataTables_
 body a.table-action {
   color: #0B792F !important;
 }
-body table.table tbody {
-  color: black;
-}
-body table.table tbody th {
+body table.table thead th {
   background-color: #666;
   color: white;
+}
+body table.table tbody {
+  color: black;
 }
 body table.table tbody tr.new-row td {
   background: #8fd19e;

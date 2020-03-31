@@ -1,0 +1,4 @@
+
+{% for scan in scans %}
+    <img style="width: 100px" src="{{ path('paragonImg', { 'id': scan.id, 'hash':  scan.fileName}) }}" alt="{{ scan.fileNameOrig }}">
+{% endfor %}

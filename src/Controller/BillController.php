@@ -240,25 +240,40 @@ class BillController extends AbstractController
 
     /**
      * @param Request $request
+     * @param FileUploader $fileUploader
      * @param $id
      *
+     * @return Response
      * @Route("uploadScan/{id}", name="uploadScan", methods={"POST"})
      */
-    public function uploadScan(Request $request, $id)
+    public function uploadScan(Request $request, FileUploader $fileUploader, $id)
     {
         $bill = $this->getDoctrine()
             ->getRepository(Bill::class)
             ->find($id);
 
-        var_dump($_POST);
-        var_dump($_FILES);
-
         $form = $this->createForm(BillScanType::class, new BillScan());
         $form->handleRequest($request);
 
+//        var_dump($_FILES);exit;
+
         if ($form->isSubmitted() && $form->isValid()) {
-            echo "OK";
-            exit;
+             //$file = $form->get('billFile')->getData(); //why???
+            $billScan = $request->files->get('billScan');
+            $file = $billScan['billFile'];
+            if ($file) {
+                $originalFilename = $file->getClientOriginalName();
+                $safeFileName = $fileUploader->upload($file);
+                if ($safeFileName) {
+                    $newBillScan = new BillScan();
+                    $newBillScan->setFileName($safeFileName);
+                    $newBillScan->setFileNameOrig($originalFilename);
+                    $bill->addBillScan($newBillScan);
+                }
+            }
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($bill);
+            $entityManager->flush();
         } else {
             echo "ERROR ".count($form->getErrors());
             foreach ($form->getErrors() as $error) {
@@ -268,5 +283,20 @@ class BillController extends AbstractController
         }
 
         return new Response();
+    }
+
+    /**
+     * @param Request $request
+     * @param $id
+     *
+     * @Route("fotos/{id}", name="fotos")
+     */
+    public function fotos (Request $request, $id) {
+        $repository = $this->getDoctrine()->getRepository(Bill::class);
+        $bill = $repository->find($id);
+        $scans = $bill->getBillScans();
+        return $this->render('bill/_fotos.html.twig', [
+            'scans' => $scans
+        ]);
     }
 }
